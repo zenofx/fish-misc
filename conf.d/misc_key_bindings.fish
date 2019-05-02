@@ -77,13 +77,23 @@ function fzy_change_directory -d "change directory"
     commandline -f repaint
 end
 
-function __fzy_get_exclusion_pattern
-	set -l excluded_dirs .git .hg .svn .bzr .arch-ids
-	set -l epar
-	for i in $excluded_dirs
-		set -a epar "-path \$dir'*$i' -o"
+function __fish_version_gt -a expected actual -d "Compare versions."
+	if [ -z "$actual" ]
+		set actual $FISH_VERSION
 	end
-	echo (string join ' ' -- $epar)
+	printf '%s\n' $expected $actual | sort --check=silent --version-sort
+	return $status
+end
+
+function __fzy_get_exclusion_pattern
+	if __fish_version_gt '2.7.2'
+		set -l excluded_dirs .git .hg .svn .bzr .arch-ids
+		set -l epar
+		for i in $excluded_dirs
+			set -a epar "-path \$dir'*$i' -o"
+		end
+		echo (string join ' ' -- $epar)
+	end
 end
 
 function __fzy_parse_commandline -d 'Parse the current command line token and return split of existing filepath and rest of token'
