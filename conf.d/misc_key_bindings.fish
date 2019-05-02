@@ -1,12 +1,30 @@
+function __fish_version_gt -a expected actual -d "Compare versions."
+	if [ -z "$actual" ]
+		set actual $FISH_VERSION
+	end
+	printf '%s\n' $expected $actual | sort --check=silent --version-sort
+	return $status
+end
+
+if __fish_version_gt "2.7.2"
+	set mfish 1
+end
+
 bind \cr 'fzy_select_history'
-bind \cf 'fzy_select_file'
-bind \cg 'fzy_change_directory'
+if [ $mfish ]
+	bind \cf 'fzy_select_file'
+	bind \cg 'fzy_change_directory'
+end
 
 if bind -M insert > /dev/null 2>&1
 	bind -M insert \cr 'fzy_select_history'
-	bind -M insert \cf 'fzy_select_file'
-	bind -M insert \cg 'fzy_change_directory'
+	if [ $mfish ]
+		bind -M insert \cf 'fzy_select_file'
+		bind -M insert \cg 'fzy_change_directory'
+	end
 end
+
+set -e mfish
 
 function misc_uninstall -e misc_uninstall
 	bind -e \cr
@@ -77,23 +95,13 @@ function fzy_change_directory -d "change directory"
     commandline -f repaint
 end
 
-function __fish_version_gt -a expected actual -d "Compare versions."
-	if [ -z "$actual" ]
-		set actual $FISH_VERSION
-	end
-	printf '%s\n' $expected $actual | sort --check=silent --version-sort
-	return $status
-end
-
 function __fzy_get_exclusion_pattern
-	if __fish_version_gt '2.7.2'
-		set -l excluded_dirs .git .hg .svn .bzr .arch-ids
-		set -l epar
-		for i in $excluded_dirs
-			set -a epar "-path \$dir'*$i' -o"
-		end
-		echo (string join ' ' -- $epar)
+	set -l excluded_dirs .git .hg .svn .bzr .arch-ids
+	set -l epar
+	for i in $excluded_dirs
+		set -a epar "-path \$dir'*$i' -o"
 	end
+	echo (string join ' ' -- $epar)
 end
 
 function __fzy_parse_commandline -d 'Parse the current command line token and return split of existing filepath and rest of token'
