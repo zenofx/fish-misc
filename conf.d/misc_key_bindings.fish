@@ -78,7 +78,7 @@ function fzy_change_directory -d "change directory"
     set -l fzy_query $commandline[2]
 	set -l fzy_args '-l 15'
     set -q search_cmd; or set -l search_cmd "
-    command find -L \$dir -mindepth 1 \\( "(__fzy_get_exclusion_pattern)" -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' \\) -prune \
+    command find -L $dir -mindepth 1 \\( "(__fzy_get_exclusion_pattern)" -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' \\) -prune \
     -o -type d -print ^/dev/null | command sed 's@^\./@@'"
 	if [ -n $fzy_query ]
 		set fzy_args "-l 15 -q $fzy_query"
