@@ -1,23 +1,16 @@
-	function safe_launch --description 'launch command inside a protected tmux session'
-        if ! command -sq tmux
-            return 1
-        end
+function safe_launch --description 'launch command inside a tmux session'
+	if ! command -sq tmux; return 1; end
 
-		if ! command tmux has-session -t _safe_launch ^/dev/null
-			if [ -z $TMUX ]
-				command tmux start-server \
-				&& command tmux new-session -s _safe_launch "$argv;bash -i"
-			else
-				command tmux new-session -d -s _safe_launch \
-				&& command tmux new-window -k -t _safe_launch "$argv;bash -i" \
-                && echo "created detached session '_safe_launch' to avoid nesting"
-			end
+	set -l tsock (string split ',' "$TMUX")
+
+	if [ -S "$tsock[1]" ] # already attached
+		command tmux new-window "$argv;bash -i"
+	else
+		if command tmux has-session -t main ^/dev/null
+			command tmux new-window -t main "$argv;bash -i" \
+			&& command tmux attach-session -t main
 		else
-			if [ -z $TMUX ]
-				command tmux new-window -t _safe_launch "$argv;bash -i" \
-				&& command tmux attach-session -t _safe_launch
-			else
-				command tmux new-window -t _safe_launch "$argv;bash -i"
-			end
+			command tmux new-session -A -s main "$argv;bash -i"
 		end
 	end
+end
