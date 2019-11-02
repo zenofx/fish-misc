@@ -5,16 +5,15 @@ function tms --description 'create basic tmux working layout'
 		set session 'main'
 		#  we cannot use new-session -A because we are not allowed to block here
 		if ! command tmux has-session "$session" ^/dev/null
-			command tmux new-session -d -s "$session"
+			command tmux new-session -d -s "$session" "bash -i"
 		end	
 	end
 	command tmux \
 			#rename-window -t "$session:1" "sys" \; \
 			new-window -d -c "$HOME" -t "$session:2" \; \
 			new-window -d -c "$HOME" -t "$session:3" \; \
-			new-window -d -c "$HOME" -t "$session:4" "bash -i" \; \
+			new-window -d -c "$HOME" -t "$session:4" \; \
 			new-window -d -c "$HOME" -n "run" -t "$session:5" \; \
-			new-window -d -c "$HOME" -n "div" -t "$session:6" \; \
 			new-window -d -c "$HOME" -n "mon" -t "$session:10" \; \
 			split-window -d -h -p 40 -t "$session:10" \; \
 			split-window -d -v -t "$session:10"
