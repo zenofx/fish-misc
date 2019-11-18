@@ -2,7 +2,7 @@ function safe_launch_extra --description 'launch command inside a dedicated tmux
 	if ! command -sq tmux; return 1; end
 
 	set -l tsock (string split ',' "$TMUX")
-    command tmux has-session -t _safe_launch ^/dev/null
+    command tmux has-session -t _safe_launch >/dev/null 2>&1
     set -l sess $status
 
 	if [ -S "$tsock[1]" ] # already attached

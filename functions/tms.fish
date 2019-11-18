@@ -4,7 +4,7 @@ function tms --description 'create basic tmux working layout'
 		# we only modify main *or* the currently attached session
 		set session 'main'
 		#  we cannot use new-session -A because we are not allowed to block here
-		if ! command tmux has-session "$session" ^/dev/null
+		if ! command tmux has-session "$session" >/dev/null 2>&1
 			command tmux new-session -d -s "$session" "bash -i"
 		end	
 	end

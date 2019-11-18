@@ -6,7 +6,7 @@ function safe_launch --description 'launch command inside a tmux session'
 	if [ -S "$tsock[1]" ] # already attached
 		command tmux new-window "$argv;bash -i"
 	else
-		if command tmux has-session -t main ^/dev/null
+		if command tmux has-session -t main >/dev/null 2>&1
 			command tmux new-window -t main "$argv;bash -i" \
 			&& command tmux attach-session -t main
 		else
