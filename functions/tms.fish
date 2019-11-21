@@ -13,10 +13,10 @@ function tms --description 'create basic tmux working layout'
 			new-window -d -c "$HOME" -t "$session:2" \; \
 			new-window -d -c "$HOME" -t "$session:3" \; \
 			new-window -d -c "$HOME" -t "$session:4" \; \
-			new-window -d -c "$HOME" -n "run" -t "$session:5" \; \
-			new-window -d -c "$HOME" -n "mon" -t "$session:10" \; \
-			split-window -d -h -p 40 -t "$session:10" \; \
-			split-window -d -v -t "$session:10"
+			new-window -d -c "$HOME" -n "run" -t "$session:5"
+#			new-window -d -c "$HOME" -n "mon" -t "$session:10" \; \
+#			split-window -d -h -p 40 -t "$session:10" \; \
+#			split-window -d -v -t "$session:10"
 #			new-window -d -c "$HOME" -n "{ssh1}" -t "$session:7" \; \
 #			new-window -d -c "$HOME" -n "{ssh2}" -t "$session:8" \; \
 #			new-window -d -c "$HOME" -n "{ssh3}" -t "$session:9"
