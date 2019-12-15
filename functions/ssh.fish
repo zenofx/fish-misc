@@ -1,6 +1,5 @@
-function ssh
-  set ps_res (ps -p (ps -p %self -o ppid= | xargs -n 1) -o comm=)
-  if string match -q -- "tmux*" "$ps_res"
+function ssh --description 'sets tmux window title to ssh remote hostname'
+  if _istmux
 	set title \
 		(string split "." -- (
 			string replace --regex -- '^(?:((?:[A-Za-z0-9_])+)\\@)?((?:[A-Za-z0-9_\\.])+)(?:\\:(\\/(?:[A-Za-z0-9_\\/]*))){0,1}$' '$2' (
