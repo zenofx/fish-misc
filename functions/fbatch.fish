@@ -1,5 +1,5 @@
 function fbatch
-  command ps -u $USER -o "pid,ppid,etime,ni,sched,policy,stat,tname,cmd" | command sk -m | while read -l pid _
+  command ps -u $USER -o "pid,ppid,etime,ni,sched,policy,stat,tname,cmd" | command fzf -m | while read -l pid _
     set pids $pids $pid
   end
   command schedtool -B -- $pids

@@ -1,5 +1,5 @@
 function fkill
-    command ps -u $USER -o "pid,ppid,etime,stat,tname,cmd" | command sk -m | while read -l pid _
+    command ps -u $USER -o "pid,ppid,etime,stat,tname,cmd" | command fzf -m | while read -l pid _
       set pids $pids $pid
     end
     if string match --quiet --regex --invert '\D' $argv[1];
