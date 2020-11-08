@@ -6,7 +6,7 @@ function fish_greeting
 	# caching
 	set now (date '+%s')
 	set stale false
-	set caching_time 60
+	set caching_time 600
 	
 	if ! set -q FISH_GREETING_EPOCH
 		set -U FISH_GREETING_EPOCH $now
