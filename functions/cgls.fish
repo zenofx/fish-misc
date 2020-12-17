@@ -1,3 +1,3 @@
 function cgls --description 'list systemd cgroups'
-    systemd-cgls $argv
+	systemd-cgls $argv
 end

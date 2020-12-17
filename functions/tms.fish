@@ -1,5 +1,5 @@
 function tms --description 'create basic tmux working layout'
-    if ! _istmux
+	if ! _istmux
 		# we only modify main *or* the currently attached session
 		set session 'main'
 		#  we cannot use new-session -A because we are not allowed to block here
