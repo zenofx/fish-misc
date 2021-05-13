@@ -19,10 +19,10 @@ function fish_greeting
 		set stale true
 	end
 	
-	if [ -d $XDG_CACHE_HOME ]
-		set buf "$XDG_CACHE_HOME/fish_greeting"
+	if [ -d $XDG_RUNTIME_DIR ]
+		set buf "$XDG_RUNTIME_DIR/fish_greeting"
 	else
-		set buf "$HOME/.cache/fish_greeting"
+		set buf "/run/user/"(id -u)"/fish_greeting"
 	end
 
 	if ! $stale; and [ -f $buf ]
