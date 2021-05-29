@@ -4,7 +4,7 @@ function tms --description 'create basic tmux working layout'
 		set session 'main'
 		#  we cannot use new-session -A because we are not allowed to block here
 		if ! command tmux has-session "$session" >/dev/null 2>&1
-			command tmux new-session -d -s "$session" "bash -i"
+			command tmux new-session -d -s "$session" -t primary "bash -i"
 		end	
 	end
 	command tmux \
@@ -26,8 +26,8 @@ function tms --description 'create basic tmux working layout'
 		# no subshell capability, no simple double fork
 		# (sleep 60 &)
 		# ((exec sleep 60)&)
-		# use setsid or disown instead
-		command setsid bash -c 'sleep 1s; tmux kill-session -C' &
+		# use setsid instead
+		command setsid -f bash -c 'sleep 1s; tmux kill-session -C'
 	end
 
 	# lastly we attach
