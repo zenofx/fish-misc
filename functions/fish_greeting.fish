@@ -1,3 +1,4 @@
+# vim: ft=fish ts=4 sw=4 noet
 function fish_greeting
 	if ! set -q fish_greeting; or [ -z $fish_greeting ]
 		return

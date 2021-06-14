@@ -1,3 +1,4 @@
+# vim: ft=fish ts=4 sw=4 noet
 function _istmux --description 'returns true if run inside tmux session'
 	set -l ps_res (ps -p (ps -p %self -o ppid= | xargs -n 1) -o comm=)
 	if string match -q -- "tmux*" "$ps_res"

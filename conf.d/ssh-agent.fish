@@ -1,3 +1,4 @@
+# vim: ft=fish ts=4 sw=4 noet
 # set path to weasel-pageant folder with set -Ux beforehand
 #read -l rel < /proc/sys/kernel/osrelease
 set -l target "$WEASEL_PATH/weasel-pageant"

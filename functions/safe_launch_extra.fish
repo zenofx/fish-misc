@@ -1,3 +1,4 @@
+# vim: ft=fish ts=4 sw=4 noet
 function safe_launch_extra --description 'launch command inside a dedicated tmux session'
 	if ! command -sq tmux; return 1; end
 

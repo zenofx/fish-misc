@@ -1,3 +1,4 @@
+# vim: ft=fish ts=4 sw=4 noet
 function fkill
 	command ps -u $USER -o "pid,ppid,etime,stat,tname,cmd" | command fzf -m | while read -l pid _
 		set pids $pids $pid
