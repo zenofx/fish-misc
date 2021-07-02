@@ -5,7 +5,7 @@ function safe_launch_extra --description 'launch command inside a dedicated tmux
 	command tmux has-session -t _safe_launch >/dev/null 2>&1
 	set -l sess $status
 
-	if _istmux
+	if _is_tmux
 		if [ "$sess" = 0 ] # has session
 			command tmux new-window -t _safe_launch "$argv;bash -i"
 		else

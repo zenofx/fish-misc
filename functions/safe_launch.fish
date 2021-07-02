@@ -2,7 +2,7 @@
 function safe_launch --description 'launch command inside a tmux session'
 	if ! command -sq tmux; return 1; end
 
-	if _istmux
+	if _is_tmux
 		command tmux new-window "$argv;bash -i"
 	else
 		if command tmux has-session -t main >/dev/null 2>&1

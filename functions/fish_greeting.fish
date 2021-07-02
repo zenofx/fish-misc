@@ -43,7 +43,7 @@ function fish_greeting
 
 	printf -- '%b\n%b\n\n' \
 		" \\e[1mDisk usage:\\e[0m" \
-		(df -lh --output=source,target,used,avail,pcent ^/dev/null | \
+		(df -lh --output=source,target,used,avail,pcent 2>/dev/null | \
 		grep -E 'dev/(xvda|sd|mapper)' | \
 #		tail -n +2 | \
 		column -t -N source,path,used,avail,percent -T path -H source | \
