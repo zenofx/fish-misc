@@ -27,7 +27,7 @@ function fish_greeting
 	end
 
 	if ! $stale; and [ -f $buf ]
-		cat "$buf"
+		cat $buf
 		printf "\nCached at %s\n" (date -d @"$FISH_GREETING_EPOCH")
 		return
 	end
@@ -82,6 +82,6 @@ function fish_greeting
 				s/$/\\\e[0m/
 				s/^/\t/') >> "$buf"
 
-	cat "$buf"
+	cat $buf
 	set_color normal
 end

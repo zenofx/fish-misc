@@ -4,7 +4,7 @@ function fkill
 		set pids $pids $pid
 	end
 	if string match --quiet --regex --invert '\D' $argv[1];
-		kill "$argv[1]" -- $pids
+		kill $argv[1] -- $pids
 	else
 		kill -- $pids
 	end

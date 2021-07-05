@@ -14,7 +14,7 @@ function chkpkg --description "check for new fedora packages"
 	end
 	for package in $packages
 		echo "Checking package: $package"
-		koji list-builds --state=COMPLETE --after=(env LC_ALL=C date -d "-"$days" days") --package $package; 
+		koji list-builds --state=COMPLETE --after=(env LC_ALL=C date -d '-'$days' days') --package $package; 
 	end
 end
 
